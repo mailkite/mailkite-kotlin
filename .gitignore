@@ -1,0 +1,8 @@
+# Docs: docs/architecture/client-side-oauth-libraries.md
+.gradle/
+build/
+.test-build/
+.deps/
+local.properties
+*.iml
+.idea/

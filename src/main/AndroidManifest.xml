@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Docs: docs/architecture/client-side-oauth-libraries.md -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application>
+        <!--
+          Catches the OAuth redirect back from the Custom Tab:
+          mailkite-<clientid>://callback. The scheme is injected from the app's
+          manifestPlaceholders["mailkiteRedirectScheme"] so it matches the OAuth
+          client id (see README).
+        -->
+        <activity
+            android:name="dev.mailkite.client.RedirectActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:scheme="${mailkiteRedirectScheme}"
+                    android:host="callback" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
